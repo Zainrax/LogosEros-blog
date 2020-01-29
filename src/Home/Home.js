@@ -1,19 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Home = ({ test }) => (
+const LatestPosts = () => {
+  const list = ['test', 'one', 'two'];
+
+  return (
+    <div>
+      <h2>Latest Posts</h2>
+      {list.map((l) => <h3>{l}</h3>)}
+    </div>
+  );
+};
+
+const Home = () => (
   <div>
-    <h1>Home</h1>
-    <h2>{test ? 'True' : 'False'}</h2>
+    <LatestPosts />
   </div>
 );
-
-Home.propTypes = {
-  test: PropTypes.bool,
-};
-
-Home.defaultProps = {
-  test: false,
-};
 
 export default Home;
