@@ -12,11 +12,6 @@ const svgButton = css`
   margin-left: 1em;
 `;
 
-const svgStyle = css`
-  background-color: none;
-  width: 38;
-  height: 38;
-`;
 
 const config = { mass: 13, tension: 1300, friction: 190 };
 
@@ -29,7 +24,7 @@ const ToggleButton = ({ toggle, setToggle }) => {
 
   return (
     <button css={svgButton} type="button" onClick={() => { setToggle(!toggle); }}>
-      <svg css={svgStyle} width="40px" height="40px" viewBox="0 0 40 40" fill="none">
+      <svg width="40px" height="40px" viewBox="0 0 40 40" fill="none">
         <animated.path
           css={{
             transformOrigin: 'center',
