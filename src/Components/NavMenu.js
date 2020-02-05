@@ -17,6 +17,7 @@ const navStyle = css`
 
 const ulStyle = css`
   list-style: none;
+  width: 0;
   margin: 0;
 `
 
