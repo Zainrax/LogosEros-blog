@@ -28,7 +28,7 @@ function Box (props) {
 
 const BackgroundCanvas = () => {
   return (
-    <Canvas>
+    <Canvas style={{ position: 'absolute' }}>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Box position={[-1.2, 0, 0]} />
