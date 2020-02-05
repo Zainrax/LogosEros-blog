@@ -1,14 +1,15 @@
 /** @jsx jsx */
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Global, css, jsx } from '@emotion/core';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Global, css, jsx } from '@emotion/core'
 
-import NavMenu from '../Components/NavMenu';
-import Home from '../Home';
-import './App.css';
+import BackgroundCanvas from '../Components/BackgroundCanvas'
+import NavMenu from '../Components/NavMenu'
+import Home from '../Home'
+import './App.css'
 
 const mainStyle = css`
-`;
+`
 
 const App = () => (
   <Router>
@@ -25,12 +26,13 @@ const App = () => (
       `}
     />
     <main className="App" css={mainStyle}>
+      <BackgroundCanvas />
       <Switch>
         <Route exact path="/" render={() => <Home />} />
       </Switch>
       <NavMenu />
     </main>
   </Router>
-);
+)
 
-export default App;
+export default App
