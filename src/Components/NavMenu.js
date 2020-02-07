@@ -9,7 +9,7 @@ const navStyle = css`
   position: absolute;
   bottom: 0;
   padding-bottom: 0.2em;
-  font-size:  calc(3em + 20 * ((100vw) / 660));
+  font-size:  calc(1em + 25 * ((90vw + 50vh) / 660));
   font-weight: 800;
   font-family: 'Raleway', sans-serif;
   line-height: 1em;
