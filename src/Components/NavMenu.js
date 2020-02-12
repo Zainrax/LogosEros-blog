@@ -4,6 +4,7 @@ import { css, jsx } from '@emotion/core'
 import { useTrail, animated } from 'react-spring'
 import { NavLink } from 'react-router-dom'
 import ToggleButton from './ToggleButton'
+import { linkReset, listReset } from '../CSS'
 
 const navStyle = css`
   position: absolute;
@@ -13,17 +14,6 @@ const navStyle = css`
   font-weight: 800;
   font-family: 'Raleway', sans-serif;
   line-height: 1em;
-`
-
-const ulStyle = css`
-  list-style: none;
-  width: 0;
-  margin: 0;
-`
-
-const linkStyle = css`
-  color: white;
-  text-decoration: none;
 `
 
 const config = { mass: 5, tension: 1400, friction: 130 }
@@ -43,11 +33,11 @@ const NavMenu = () => {
     }
     >
       <ToggleButton toggle={toggle} setToggle={setToggle} />
-      <ul css={ulStyle}>
+      <ul css={listReset}>
         { slide.map(({ x, ...rest }, index) => (
           <animated.li key={menuItems[index]} style={{ transform: x.interpolate((y) => `translate3d(${y}px,0,0)`), ...rest }}>
             <NavLink
-              css={linkStyle}
+              css={linkReset}
               to={`/${menuItems[index] !== 'HOME' ? menuItems[index].toLowerCase() : ''}`}
             >
               <b>
