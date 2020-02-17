@@ -15,18 +15,17 @@ const App = () => (
   <Router>
     <Global styles={css`
         '@font-face': {
-          src: "https://fonts.googleapis.com/css?family=Raleway:bold|Roboto+Slab|Space+Mono&display=swap"
+          src: "https://fonts.googleapis.com/css?family=Raleway:bold|Roboto+Slab|Space+Mono|Futura&display=swap"
         }
 
         body {
           background-color: #1C1C1C;
-          max-width: 100%;
-          min-height 100vh;
+          overflow: hidden;
         }
       `}
     />
+    <BackgroundCanvas />
     <main className="App" css={mainStyle}>
-      <BackgroundCanvas />
       <Switch>
         <Route exact path="/" render={() => <Home />} />
       </Switch>

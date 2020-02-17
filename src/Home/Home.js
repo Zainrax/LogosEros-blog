@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import LatestPosts from './LatestPost';
+import React, { useState, useEffect } from 'react'
+import LatestPosts from './LatestPost'
 
 const Home = ({ posts }) => {
-  const [titles, setTitles] = useState([]);
+  const [titles, setTitles] = useState([])
 
   useEffect(() => {
     setTitles(
-      posts,
-    );
-  }, []);
+      posts
+    )
+  }, [])
   return (
     <div>
       <LatestPosts />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

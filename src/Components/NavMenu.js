@@ -12,8 +12,14 @@ const navStyle = css`
   padding-bottom: 0.2em;
   font-size:  calc(1em + 25 * ((90vw + 50vh) / 660));
   font-weight: 800;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Futura', sans-serif;
   line-height: 1em;
+`
+
+const navLinkStyle = css`
+  &:hover { 
+    color: red;
+  }
 `
 
 const config = { mass: 5, tension: 1400, friction: 130 }
@@ -37,7 +43,7 @@ const NavMenu = () => {
         { slide.map(({ x, ...rest }, index) => (
           <animated.li key={menuItems[index]} style={{ transform: x.interpolate((y) => `translate3d(${y}px,0,0)`), ...rest }}>
             <NavLink
-              css={linkReset}
+              css={css`${linkReset} ${navLinkStyle}`}
               to={`/${menuItems[index] !== 'HOME' ? menuItems[index].toLowerCase() : ''}`}
             >
               <b>
