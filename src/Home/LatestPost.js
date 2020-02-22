@@ -5,8 +5,6 @@ import styled from '@emotion/styled'
 import { linkReset, listReset } from '../CSS'
 
 const LatestPostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   margin-left: 2em;
   color: white;
 
@@ -14,15 +12,22 @@ const LatestPostContainer = styled.div`
     margin: 0
     font-family: "Futura";
     font-size: 2.5em;
+    margin-bottom: 0.5em;
   }
+ol  {
+  max-width: 30em;
+}
 `
 
 const LatestPost = styled.li`
-  font-family: "Space Mono"
+  font-family: "Space Mono";
+  font-size: 1.5em;
+  width:100%;
+  padding-bottom: 0.5em;
 `
 
 const LatestPosts = () => {
-  const list = ['test', 'one', 'two']
+  const list = ['The path to resistance', 'Being one with the path', 'The middle ground of software']
 
   return (
     <LatestPostContainer>
