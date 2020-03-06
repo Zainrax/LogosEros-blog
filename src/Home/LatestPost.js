@@ -9,19 +9,22 @@ const LatestPostContainer = styled.div`
   color: white;
 
   h2 {
-    margin: 0
+    margin: 0;
     font-family: "Futura";
     font-size: 2.5em;
     margin-bottom: 0.5em;
   }
-ol  {
-  max-width: 30em;
-}
+
+  ol  {
+    white-space: nowrap;
+    max-width: 30em;
+  }
 `
 
 const LatestPost = styled.li`
   font-family: "Space Mono";
   font-size: 1.5em;
+  font-weight: 600;
   width:100%;
   padding-bottom: 0.5em;
 `
