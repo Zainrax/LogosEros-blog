@@ -1,8 +1,6 @@
-const functions = require('firebase-functions');
+const {gqlServer} = require('./graphql/server');
+const {https} = require( 'firebase-functions');
+const server = gqlServer();
+const api = https.onRequest(server);
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+exports.graphql = api
