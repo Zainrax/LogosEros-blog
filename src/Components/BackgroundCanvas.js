@@ -82,7 +82,7 @@ const BackgroundCanvas = () => {
 
   return (
     <div style={{ width: '100%', height: '100%' }} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
-      <Canvas style={{ position: 'absolute' }} >
+      <Canvas style={{ position: 'absolute', zIndex: -1 }} >
         <ambientLight />
         <pointLight position={[-25, 0, 0]} color='hsl(0,90%,55%)'/>
         <Room />
