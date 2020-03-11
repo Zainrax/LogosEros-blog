@@ -10,8 +10,17 @@ const typeDefs = gql`
     content: String!
   }
 
+  type project {
+    title: String!
+    description: String!
+    date: Date
+    github: String
+    website: String
+  }
+
   type Query { 
-    posts: [post]
+    posts: [post]!
+    projects: [project]! 
   }
 `
 

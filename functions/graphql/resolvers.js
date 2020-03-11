@@ -25,7 +25,14 @@ const resolvers = {
         .ref('posts')
         .once('value')
         .then(snap => snap.val())
-        .then(val => Object.keys(val).map(key => val[key]))
+        .then(val => Object.keys(val).map(key => val[key])),
+    projects: (_,__, {admin}) =>
+      admin
+    .database()
+    .ref('projects')
+    .once('value')
+    .then(snap => snap.val())
+    .then(val => Object.keys(val).map(key => val[key]))
   }
 }
 
