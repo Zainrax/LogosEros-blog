@@ -22,6 +22,17 @@ const typeDefs = gql`
     posts: [post]!
     projects: [project]! 
   }
+
+  input newPost {
+    title: String!
+    description: String
+    date: Date
+    content: String!
+  }
+
+  type Mutation {
+    post(input: newPost!): post!
+  }
 `
 
 module.exports = {

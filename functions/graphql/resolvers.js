@@ -17,7 +17,6 @@ const resolvers = {
       return null
     }
   }),
-
   Query: {
     posts: (_,__,{admin}) =>
       admin
@@ -32,9 +31,19 @@ const resolvers = {
     .ref('projects')
     .once('value')
     .then(snap => snap.val())
-    .then(val => Object.keys(val).map(key => val[key]))
+    .then(val => Object.keys(val).map(key => val[key])),
+  },
+    Mutation: {
+      post: (_, {input}, {admin}) =>  {
+        admin
+      .database()
+      .ref('posts/' + input.title.toLowerCase().replace(/\s/g, "-"))
+      .set(input)
+      return input
+    }
   }
 }
+  
 
 module.exports = {
   resolvers
