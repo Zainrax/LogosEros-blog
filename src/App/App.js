@@ -3,9 +3,9 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Global, css, jsx } from '@emotion/core'
 
-import BackgroundCanvas from '../Components/BackgroundCanvas'
 import NavMenu from '../Components/NavMenu'
 import Home from '../Home'
+import Admin from '../Admin'
 import './App.css'
 
 const mainStyle = css`
@@ -24,10 +24,10 @@ const App = () => (
         }
       `}
     />
-    <BackgroundCanvas />
     <main className="App" css={mainStyle}>
       <Switch>
         <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/admin" render={() => <Admin />} />
       </Switch>
       <NavMenu />
     </main>
