@@ -2,6 +2,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Global, css, jsx } from '@emotion/core'
+import styled from '@emotion/styled'
 import ApolloClient, { gql } from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
 
@@ -9,8 +10,14 @@ import NavMenu from '../Components/NavMenu'
 import Home from '../Home'
 import Admin from '../Admin'
 import './App.css'
+import LogoSrc from './logo.svg'
 
 const mainStyle = css`
+`
+const Logo = styled.img`
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-bottom: 1em;
 `
 
 const App = () => {
@@ -32,6 +39,7 @@ const App = () => {
       />
       <ApolloProvider client={client}>
         <main className="App" css={mainStyle}>
+          <Logo src={LogoSrc} alt="Logos Eros" />
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/admin" render={() => <Admin />} />
