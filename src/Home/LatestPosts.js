@@ -4,6 +4,7 @@ import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+import { Link } from 'react-router-dom'
 
 import { linkReset, listReset } from '../CSS'
 
@@ -50,7 +51,7 @@ const LatestPosts = () => {
     <LatestPostContainer>
       <h2>Latest Posts</h2>
       <ol css={listReset}>
-        {data.posts.map(({ title }, index) => <LatestPost key={index}><a css={linkReset}>{title}</a></LatestPost>)}
+        {data.posts.map(({ title }, index) => <LatestPost key={index}><Link css={linkReset} to={title.toLowerCase().replace(/\s/g, '-')} >{title}</Link></LatestPost>)}
       </ol>
     </LatestPostContainer>
   )
