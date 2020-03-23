@@ -2,6 +2,9 @@ import React from 'react'
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
+import { useQuery } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost'
+
 import { linkReset, listReset } from '../CSS'
 
 const LatestPostContainer = styled.div`
@@ -29,14 +32,25 @@ const LatestPost = styled.li`
   padding-bottom: 0.5em;
 `
 
+const POSTS = gql`
+  {
+    posts {
+      title
+    }
+  }
+`
+
 const LatestPosts = () => {
-  const list = ['The path to resistance', 'Being one with the path', 'The middle ground of software']
+  const { loading, error, data } = useQuery(POSTS)
+
+  if (loading) return <p>loading...</p>
+  if (error) return <p> Error : (</p>
 
   return (
     <LatestPostContainer>
       <h2>Latest Posts</h2>
       <ol css={listReset}>
-        {list.map((l, i) => <LatestPost key={i}><a css={linkReset}>{l}</a></LatestPost>)}
+        {data.posts.map(({ title }, index) => <LatestPost key={index}><a css={linkReset}>{title}</a></LatestPost>)}
       </ol>
     </LatestPostContainer>
   )
