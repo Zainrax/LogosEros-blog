@@ -6,7 +6,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "standard"
+        "airbnb/base",
+        "prettier"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -21,12 +22,14 @@
     },
     "plugins": [
         "react",
-        "emotion"
+        "emotion",
+        "prettier"
     ],
     "rules": {
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "emotion/jsx-import": "error",
       "react/jsx-uses-react": "error",   
-      "react/jsx-uses-vars": "error" 
+      "react/jsx-uses-vars": "error",
+      "prettier/prettier": "error"
     }
 }
