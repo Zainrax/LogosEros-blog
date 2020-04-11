@@ -1,54 +1,58 @@
 /** @jsx jsx */
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Global, css, jsx } from '@emotion/core'
-import styled from '@emotion/styled'
-import ApolloClient, { gql } from 'apollo-boost'
-import { ApolloProvider } from '@apollo/react-hooks'
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Global, css, jsx } from "@emotion/core";
+import styled from "@emotion/styled";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { ThemeProvider } from "emotion-theming";
 
-import NavMenu from '../Components/NavMenu'
-import Home from '../Home'
-import Admin from '../Admin'
-import './App.css'
-import LogoSrc from './logo.svg'
+import Home from "../Home";
+import Admin from "../Admin";
+import "./App.css";
+
+const theme = {
+  colors: {
+    primary: "0A0A0A",
+    highlight: "CC3838",
+  },
+};
 
 const mainStyle = css`
-`
-const Logo = styled.img`
-  margin-top: 2em;
-  margin-left: 2em;
-  margin-bottom: 1em;
-`
-
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 const App = () => {
   const client = new ApolloClient({
-    uri: 'https://us-central1-logos-eros.cloudfunctions.net/graphql'
-  })
+    uri: "https://us-central1-logos-eros.cloudfunctions.net/graphql",
+  });
+
   return (
     <Router>
-      <Global styles={css`
-        '@font-face': {
-          src: "https://fonts.googleapis.com/css?family=Raleway:bold|Roboto+Slab|Space+Mono|Futura&display=swap"
-        }
+      <Global
+        styles={css`
+          "@font-face": {
+            src: "https://fonts.googleapis.com/css?family=Raleway:bold|Roboto+Slab|Space+Mono|Futura&display=swap";
+          }
 
-        body {
-          background-color: #1C1C1C;
-          overflow: hidden;
-        }
-      `}
+          body {
+            overflow: hidden;
+          }
+        `}
       />
       <ApolloProvider client={client}>
-        <main className="App" css={mainStyle}>
-          <Logo src={LogoSrc} alt="Logos Eros" />
-          <Switch>
-            <Route exact path="/" render={() => <Home />} />
-            <Route exact path="/admin" render={() => <Admin />} />
-          </Switch>
-          <NavMenu />
-        </main>
+        <ThemeProvider theme={theme}>
+          <main className="App" css={mainStyle}>
+            <Switch>
+              <Route exact path="/" render={() => <Home />} />
+              <Route exact path="/admin" render={() => <Admin />} />
+            </Switch>
+          </main>
+        </ThemeProvider>
       </ApolloProvider>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

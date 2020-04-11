@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import React from 'react'
-import { useSpring, animated } from 'react-spring'
-import { css, jsx } from '@emotion/core'
+import React from "react";
+import { useSpring, animated } from "react-spring";
+import { css, jsx } from "@emotion/core";
 
 const svgButton = css`
   outline: none;
@@ -9,26 +9,32 @@ const svgButton = css`
   cursor: pointer;
   border: none;
   margin-left: 1em;
-`
+`;
 
-const config = { mass: 13, tension: 1300, friction: 190 }
+const config = { mass: 13, tension: 1300, friction: 190 };
 
 const ToggleButton = ({ toggle, setToggle }) => {
   const { x, y } = useSpring({
     config,
     x: toggle ? 1 : 0,
-    y: toggle ? 0 : 1
-  })
+    y: toggle ? 0 : 1,
+  });
 
   return (
-    <button css={svgButton} type="button" onClick={() => { setToggle(!toggle) }}>
+    <button
+      css={svgButton}
+      type="button"
+      onClick={() => {
+        setToggle(!toggle);
+      }}
+    >
       <svg width="40px" height="40px" viewBox="0 0 40 40" fill="none">
         <animated.path
           css={{
-            transformOrigin: 'center'
+            transformOrigin: "center",
           }}
           className="menuPath"
-          stroke="white"
+          stroke="black"
           strokeWidth="8"
           fill="none"
           transform={y.interpolate((i) => `scale(${i})`)}
@@ -40,10 +46,10 @@ const ToggleButton = ({ toggle, setToggle }) => {
         />
         <animated.path
           css={{
-            transformOrigin: 'center'
+            transformOrigin: "center",
           }}
           className="menuPath"
-          stroke="white"
+          stroke="black"
           strokeWidth="8"
           fill="none"
           transform={x.interpolate((j) => `scale(${j})`)}
@@ -53,7 +59,7 @@ const ToggleButton = ({ toggle, setToggle }) => {
         />
       </svg>
     </button>
-  )
-}
+  );
+};
 
-export default ToggleButton
+export default ToggleButton;
