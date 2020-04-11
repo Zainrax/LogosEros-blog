@@ -1,7 +1,8 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring/three";
 import PropTypes from "prop-types";
 import { Canvas, useFrame, useThree } from "react-three-fiber";
+import * as THREE from "three";
 import { useInterval } from "../Utilities";
 
 const Room = () => {
@@ -14,23 +15,40 @@ const Room = () => {
   );
 };
 
-const Indicator = ({ xyz }) => {
+const Indicator = ({ isPressed, xyz }) => {
+  const { mouse, camera } = useThree();
   const circle = useRef();
-  console.log(xyz);
+
+  const vec3 = useCallback(() => {
+    const vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
+    vector.unproject(camera);
+    const dir = vector.sub(camera.position).normalize();
+    const distance = -camera.position.z / dir.z;
+    const pos = camera.position.clone().add(dir.multiplyScalar(distance));
+    return [pos.x, pos.y, pos.z];
+  }, []);
+
   return (
-    <mesh ref={circle} position={[xyz[0], xyz[0], 0]}>
-      <circleGeometry attach="geometry" args={[0, 50]} />
+    <animated.mesh
+      scale={xyz.interpolate((x, y, z) => [z * 0.1, z * 0.1, z * 0.1])}
+      visible={isPressed}
+      ref={circle}
+      position={vec3()}
+    >
+      <circleGeometry attach="geometry" args={[0.5, 50]} />
       <meshStandardMaterial attach="material" color={"hsl(0,0%,50%)"} />
-    </mesh>
+    </animated.mesh>
   );
 };
 
 Indicator.propTypes = {
+  isPressed: PropTypes.bool,
   xyz: PropTypes.object,
 };
 
 const Pyrimod = ({ position, xyz }) => {
   // This reference will give us direct access to the mesh
+  const { mouse, camera } = useThree();
   const topMesh = useRef();
   const bottomMesh = useRef();
 
@@ -76,44 +94,54 @@ Pyrimod.propTypes = {
 
 const BackgroundCanvas = () => {
   const [pressed, setPressed] = useState(false);
-  const { mouse } = useThree();
   const xyz = useRef([0, 0, 1]);
 
   useInterval(
     () => {
-      console.log(xyz.current);
-      xyz.current[2] += 1;
+      if (xyz.current[2] < 6) {
+        xyz.current[2] += 1;
+        set({ xyz: xyz.current });
+      }
     },
     pressed ? 200 : null
   );
 
   const [props, set] = useSpring(() => ({
     xyz: xyz.current,
-    config: { mass: 8, tension: 10, friction: 10 },
+    config: { mass: 1, tension: 6, friction: 10 },
   }));
-  const onMouseDown = useCallback(({ clientX: x, clientY: y }) => {
-    setPressed(true);
-    console.log(mouse);
-    xyz.current = [0, 0, 0];
+
+  const onMouseMove = useCallback(({ clientX: x, clientY: y }) => {
+    const xCord = (x / window.innerWidth) * 2 - 1;
+    const yCord = -(y / window.innerHeight) * 2 + 1;
+    xyz.current = [xCord, yCord, xyz.current[2]];
   }, []);
+
+  const onMouseDown = useCallback(() => {
+    setPressed(true);
+    xyz.current[2] = 0;
+  }, []);
+
   const onMouseUp = useCallback(() => {
     setPressed(false);
-
     set({ xyz: xyz.current });
+    xyz.current[2] = 0;
   }, []);
 
   return (
     <>
       <Canvas
         onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
-        raycaster
         style={{ position: "absolute", zIndex: 1 }}
       >
         <ambientLight />
         <pointLight position={[-25, 0, 0]} color="hsl(0,100%,45%)" />
-        {pressed && <Indicator xyz={xyz.current} />}
-        <Pyrimod position={[0, 0, 2]} xyz={props.xyz} />
+        <Indicator isPressed={pressed} xyz={props.xyz} />
+        {
+          //       <Pyrimod position={[0, 0, 2]} xyz={props.xyz} />
+        }
         <Room />
       </Canvas>
     </>
