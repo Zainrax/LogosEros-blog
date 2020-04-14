@@ -6,10 +6,10 @@ import { BackgroundCanvas, Logo, NavMenu } from "../Components";
 const Home = () => {
   return (
     <>
-      <BackgroundCanvas />
       <Logo />
       <LatestPosts />
       <NavMenu />
+      <BackgroundCanvas />
     </>
   );
 };
